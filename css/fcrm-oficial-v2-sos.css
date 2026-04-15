@@ -46,9 +46,12 @@ body {
 .dsf__card-data,
 .dsf__amount,
 .dsf__box,
-.dsf__content {
-    background: #FFEDD4 !important;
-    background-color: #FFEDD4 !important;
+.dsf__content,
+[class^="dsf__"],
+[class*=" dsf__"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
 
 /* === TÍTULO DINÁMICO POR PASO === */

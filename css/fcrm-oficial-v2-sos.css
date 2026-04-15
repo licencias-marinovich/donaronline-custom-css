@@ -4,6 +4,10 @@
     --color-white: #FFEDD4;
 }
 
-.dsf {
+html,
+body,
+.dsf,
+form.dsf {
     background: #FFEDD4 !important;
+    background-color: #FFEDD4 !important;
 }

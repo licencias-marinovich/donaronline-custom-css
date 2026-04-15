@@ -1,13 +1,253 @@
-@import url("https://cdn.jsdelivr.net/gh/vm-casa-ronald-colombia/form-multi-step@de648b4afb0c8d00f287aa1c9e0d21bf8be47551/css/fcrm-oficial-v2.css");
-
 :root {
+    --color-red: #db0007;
+    /* Rojo Ronald McDonald */
+    --color-red-hover: #b00006;
+    /* Rojo oscuro al pasar mouse */
+    --color-blue: #27348b;
+    /* Azul Ronald */
+    --color-yellow: #ffc72c;
+    /* Amarillo Ronald */
+    --color-black: #2c2c2c;
+    /* Negro suave */
     --color-white: #FFEDD4;
+    --radius-btn: 5px;
+    /* Botones casi cuadrados */
+    --radius-input: 4px;
+    /* Inputs ligeramente redondeados */
+    --shadow-input: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    /* Sombra interna sutil */
 }
 
-html,
-body,
-.dsf,
-form.dsf {
-    background: #FFEDD4 !important;
-    background-color: #FFEDD4 !important;
+body {
+    background-color: transparent !important;
+    /* Fondo transparente por defecto */
+    font-family: 'Inter', sans-serif !important;
+    /* Tipografía moderna */
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.dsf {
+    width: 100% !important;
+    max-width: 420px !important;
+    margin: 0 auto !important;
+    padding: 20px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    position: relative;
+    padding-top: 100px !important;
+    /* Más espacio para título largo */
+}
+
+/* === TÍTULO DINÁMICO POR PASO === */
+.dsf::before {
+    display: block !important;
+    content: "Hoy puedes hacer que una familia esté cerca a su hijo mientras recibe tratamiento médico ❤️";
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    color: var(--color-red) !important;
+    line-height: 1.3 !important;
+    margin-bottom: 25px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Título Paso 2: Datos del Donante (Detectado por contenedor .dsf__donor) */
+.dsf:has(.dsf__donor)::before {
+    content: "Queremos conocerte, cuéntanos un poco de ti 📝";
+}
+
+/* Título Paso 3: Medio de Pago (Detectado por contenedor .dsf__payment o .dsf__card-data) */
+.dsf:has(.dsf__payment)::before,
+.dsf:has(.dsf__card-data)::before {
+    content: "¡Ya estás a un solo paso de ayudar a una familia! ❤️";
+}
+
+/* === ETIQUETAS Y INPUTS === */
+.dsf__group {
+    position: relative;
+    margin-bottom: 8px;
+    /* Más pegadito */
+    display: flex;
+    flex-direction: column;
+}
+
+.dsf__group label {
+    display: block !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin-bottom: 0 !important;
+    /* Sin espacio */
+    font-size: 1px !important;
+    /* Prácticamente invisible */
+    line-height: 1px !important;
+    color: transparent !important;
+    pointer-events: none !important;
+    z-index: 1;
+    background: transparent !important;
+    height: 1px !important;
+    overflow: hidden !important;
+}
+
+.dsf__group input,
+.dsf__group select {
+    box-sizing: border-box;
+    padding: 12px 16px;
+    background-color: var(--color-white) !important;
+    border: 1px solid #d1d1d1 !important;
+    border-radius: var(--radius-input);
+    font-size: 15px;
+    width: 100%;
+    height: 48px !important;
+    box-shadow: var(--shadow-input);
+    color: var(--color-black) !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* PLACEHOLDERS NATIVOS VISIBLES */
+.dsf__group input::placeholder,
+.dsf__group select::placeholder {
+    color: #999 !important;
+    /* Gris suave legible */
+    opacity: 1 !important;
+}
+
+.dsf__group input:focus {
+    border-color: var(--color-red) !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(219, 0, 7, 0.15);
+}
+
+/* === SELECCION DE MONTO === */
+.dsf__amount-option-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.dsf__amount-option {
+    padding: 12px;
+    background-color: var(--color-white);
+    border: 1px solid #ddd;
+    color: var(--color-black);
+    font-weight: 600;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dsf__amount-option--selected {
+    background-color: var(--color-red) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-red) !important;
+    font-weight: 700 !important;
+}
+
+.dsf__amount-option:hover {
+    border-color: var(--color-red);
+}
+
+/* === CONTENEDOR DE BOTONES (Volver arriba + Siguiente abajo) === */
+.dsf__buttons-container {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 15px !important;
+    width: 100% !important;
+}
+
+/* === BOTÓN PRIMARIO === */
+.dsf__button-next,
+button[type="submit"] {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    border: none;
+    background: var(--color-red) !important;
+    border-radius: var(--radius-btn);
+    padding: 14px 10px !important;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(219, 0, 7, 0.3);
+
+    /* Configuración de Altura y Texto */
+    min-height: 50px !important;
+    height: auto !important;
+    margin-top: 0 !important;
+
+    /* Ocultar texto original */
+    font-size: 0 !important;
+    color: transparent !important;
+}
+
+/* TEXTO DINÁMICO DEL BOTÓN */
+.dsf__button-next::after,
+button[type="submit"]::after {
+    /* DEFAULT (Paso 1) */
+    content: "CONTINUAR CON MI APORTE";
+
+    font-size: 15px !important;
+    color: #fff !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px;
+    line-height: 1.2 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    /* Posicionamiento relativo al flujo flex */
+    position: relative !important;
+    white-space: normal !important;
+    text-align: center !important;
+    width: 100% !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+}
+
+/* PASO 2: Datos de Contacto (Detectado por .dsf__donor) */
+.dsf:has(.dsf__donor) .dsf__button-next::after {
+    content: "CONTINUAR";
+}
+
+/* PASO 3: Pago (Detectado por .dsf__payment o .dsf__card-data) */
+.dsf:has(.dsf__payment) .dsf__button-next::after,
+.dsf:has(.dsf__card-data) .dsf__button-next::after {
+    content: "DONAR AHORA";
+    font-size: 20px !important;
+}
+
+.dsf__button-next:hover {
+    background-color: var(--color-red-hover) !important;
+    transform: translateY(-2px);
+}
+
+/* === BOTÓN VOLVER (Arriba) === */
+.dsf__button-prev {
+    background: transparent !important;
+    border: none !important;
+    color: #999 !important;
+    text-decoration: underline;
+    font-size: 13px !important;
+    padding: 5px !important;
+    margin: 0 !important;
+    cursor: pointer;
+    text-align: center !important;
+    width: 100% !important;
+    transition: color 0.2s;
+}
+
+.dsf__button-prev:hover {
+    color: var(--color-black) !important;
+}
+
+/* Ocultar mensaje seguridad genérico si estorba */
+.dsf__security-message {
+    display: none !important;
 }

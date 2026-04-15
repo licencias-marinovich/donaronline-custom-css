@@ -39,6 +39,18 @@ body {
     /* Más espacio para título largo */
 }
 
+.dsf > div,
+.dsf form,
+.dsf__donor,
+.dsf__payment,
+.dsf__card-data,
+.dsf__amount,
+.dsf__box,
+.dsf__content {
+    background: #FFEDD4 !important;
+    background-color: #FFEDD4 !important;
+}
+
 /* === TÍTULO DINÁMICO POR PASO === */
 .dsf::before {
     display: block !important;

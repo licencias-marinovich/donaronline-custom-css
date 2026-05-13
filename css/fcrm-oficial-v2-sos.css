@@ -206,12 +206,17 @@ body {
 }
 
 .dsf__recurrency-option--selected {
-    background: var(--main-color-soft) !important;
+    background: var(--main-color) !important;   /* Rojo sólido — mismo estilo que monto seleccionado */
     border-color: var(--main-color) !important;
 }
 
+.dsf__recurrency-option--selected:hover {
+    background: var(--main-color-hover) !important;
+    border-color: var(--main-color-hover) !important;
+}
+
 .dsf__recurrency-option--selected .dsf__recurrency-option-label {
-    color: var(--main-color) !important;
+    color: #fff !important;
     font-weight: 700 !important;
 }
 
@@ -220,24 +225,30 @@ body {
     font-weight: 500;
     color: var(--text-color);
     cursor: pointer;
+    transition: color var(--transition);
 }
 
-/* Ocultar el radio nativo dentro de las pills */
+/* Radio interno de la pill */
 .dsf__recurrency-option-radio {
     width: 16px !important;
     height: 16px !important;
     border: 2px solid var(--input-border) !important;
     border-radius: 50% !important;
-    transition: border-color var(--transition);
+    transition: border-color var(--transition), background-color var(--transition);
     flex-shrink: 0;
 }
 
 .dsf__recurrency-option--selected .dsf__recurrency-option-radio {
-    border-color: var(--main-color) !important;
+    border-color: #fff !important;
+    background-color: transparent !important;
 }
 
 .dsf__recurrency-option-radio-inner {
     background-color: var(--main-color) !important;
+}
+
+.dsf__recurrency-option--selected .dsf__recurrency-option-radio-inner {
+    background-color: #fff !important;
 }
 
 /* ── CHECKBOX "Acepto aumentar..." ──────────────────────────────── */

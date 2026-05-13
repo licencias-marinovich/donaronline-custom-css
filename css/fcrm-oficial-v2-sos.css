@@ -279,7 +279,7 @@ body {
 .dsf__payment .dsf__group,
 .dsf__card-data .dsf__group {
     position: relative;
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);   /* 12px · más compacto */
     display: flex;
     flex-direction: column;
 }

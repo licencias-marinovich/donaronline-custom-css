@@ -1,82 +1,102 @@
-/* ============================================================
-   BOILERPLATE — Formulario Multi-Pasos DonarOnline
+/* ════════════════════════════════════════════════════════════════
+   BOILERPLATE · Formulario Multi-Pasos DonarOnline
    Casa Ronald McDonald Colombia
-   ------------------------------------------------------------
-   Cómo usar este archivo:
-   1) Copia este archivo y renómbralo (ej: fcrm-campana-mayo.css)
-   2) Cambia SOLO los valores del bloque :root de abajo
+   ────────────────────────────────────────────────────────────────
+   Cómo usar:
+   1) Duplicar este archivo (ej: fcrm-campana-mayo.css)
+   2) Editar SOLO el bloque :root (variables)
    3) Commit + push a GitHub
-   4) Toma el nuevo commit hash y genera Base64 nuevo:
-      echo "https://cdn.jsdelivr.net/gh/licencias-marinovich/donaronline-custom-css@<HASH>/css/<archivo>.css" | base64
-   5) Pega el Base64 como ?custom_css= en el iframe
-   ------------------------------------------------------------
-   NO toques nada debajo de :root salvo que sepas qué haces.
-   ============================================================ */
+   4) Generar Base64 con:
+        echo -n "https://cdn.statically.io/gh/licencias-marinovich/donaronline-custom-css@<HASH>/css/<archivo>.css" | base64
+   5) Pegar como ?css=<BASE64> en el iframe
+
+   NO editar nada debajo del bloque :root salvo que sepas qué haces.
+   ════════════════════════════════════════════════════════════════ */
 
 :root {
-    /* === COLORES (lo único que cambia entre campañas normalmente) === */
-    --main-color: #db0007;          /* Rojo Ronald McDonald — botones, montos, focus */
-    --main-color-hover: #b00006;    /* Rojo oscuro hover */
-    --bg-color: transparent;        /* Fondo transparente para adaptarse a la página host */
-    --text-color: #2c2c2c;          /* Texto principal */
-    --input-bg: #FFFFFF;            /* Fondo de inputs (siempre blanco para legibilidad) */
+    /* ── BRAND ──────────────────────────────────────────────────── */
+    --main-color:        #DB0007;   /* Rojo CRMD · botones, montos, focus */
+    --main-color-hover:  #B00006;   /* Rojo oscuro · hover */
+    --main-color-soft:   rgba(219, 0, 7, 0.08);   /* Tinte 8% · backgrounds */
+    --main-color-ring:   rgba(219, 0, 7, 0.18);   /* Ring focus 18% */
 
-    /* === MENSAJES POR PASO (cámbialos por campaña) === */
+    --bg-color:          transparent;
+    --text-color:        #1A1A1A;
+    --text-muted:        #6B6B6B;
+    --input-bg:          #FFFFFF;
+    --input-border:      #E0DCD3;   /* Beige sutil que respeta el host cream */
+    --input-border-hover:#C9C2B5;
+
+    /* ── MENSAJES POR PASO ──────────────────────────────────────── */
     --msg-step-1: "Hoy puedes hacer que una familia esté cerca a su hijo mientras recibe tratamiento médico ❤️";
     --msg-step-2: "Queremos conocerte,\A cuéntanos un poco de ti 📝";
     --msg-step-3: "¡Ya estás a un solo paso de ayudar a una familia! ❤️";
 
-    /* === TEXTO DE BOTÓN POR PASO === */
+    /* ── TEXTO DE BOTÓN POR PASO ────────────────────────────────── */
     --btn-step-1: "CONTINUAR CON MI APORTE";
     --btn-step-2: "CONTINUAR";
     --btn-step-3: "DONAR AHORA";
 
-    /* === ESTILO (rara vez se cambia) === */
-    --radius-btn: 8px;
-    --radius-input: 10px;
-    --shadow-input: none;
-    --font-family: 'Inter', sans-serif;
+    /* ── DESIGN TOKENS ──────────────────────────────────────────── */
+    --font-family:       'Inter', system-ui, sans-serif;
+    --radius-input:      10px;
+    --radius-btn:        10px;
+    --radius-pill:       999px;
+
+    --space-2:           4px;
+    --space-3:           8px;
+    --space-4:           12px;
+    --space-5:           16px;
+    --space-6:           20px;
+    --space-7:           24px;
+    --space-8:           32px;
+    --space-9:           40px;
+
+    --ease:              cubic-bezier(0.22, 0.61, 0.36, 1);
+    --transition:        180ms var(--ease);
 }
 
-/* ============================================================
-   ⛔ DE AQUÍ EN ADELANTE: NO TOCAR
-   ============================================================ */
+/* ════════════════════════════════════════════════════════════════
+   ⛔ NO EDITAR DEBAJO DE ESTA LÍNEA
+   ════════════════════════════════════════════════════════════════ */
 
-/* === FONDO === */
+/* ── BASE ──────────────────────────────────────────────────────── */
 body {
     background-color: var(--bg-color) !important;
     font-family: var(--font-family) !important;
+    color: var(--text-color) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* === CONTENEDOR PRINCIPAL === */
+/* ── CONTENEDOR PRINCIPAL ──────────────────────────────────────── */
 .dsf {
     width: 100% !important;
     max-width: 420px !important;
     margin: 0 auto !important;
-    padding: 110px 0 20px 0 !important;     /* top:110 — compacto y consistente entre pasos */
+    padding: 96px 0 var(--space-6) 0 !important;
     background: var(--bg-color) !important;
     box-shadow: none !important;
     border: none !important;
     position: relative;
 }
 
-/* === MENSAJE DINÁMICO POR PASO ===
-   Usa las clases oficiales .dsf__step-{N}-container según docs DonarOnline.
-   Default: paso 1. Sobreescribe si detecta paso 2 o 3. */
+/* ── MENSAJE POR PASO (dinámico) ───────────────────────────────── */
 .dsf::before {
-    display: block !important;
     content: var(--msg-step-1);
-    font-size: 20px !important;
-    font-weight: 800 !important;
+    display: block !important;
+    position: absolute;
+    top: var(--space-3);
+    left: 0;
+    right: 0;
+    padding: 0 var(--space-4);
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+    letter-spacing: -0.01em;
     text-align: center !important;
     color: var(--main-color) !important;
-    line-height: 1.3 !important;
-    white-space: pre-line !important;          /* Permite line breaks con \A */
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 100%;
-    padding: 0 10px;
+    white-space: pre-line !important;
     box-sizing: border-box;
 }
 
@@ -90,10 +110,176 @@ body {
     content: var(--msg-step-3);
 }
 
-/* === ETIQUETAS Y INPUTS === */
-.dsf__group {
+/* ════════════════════════════════════════════════════════════════
+   PASO 1 · MONTOS
+   ════════════════════════════════════════════════════════════════ */
+
+.dsf__amount-option-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-6);
+}
+
+.dsf__amount-option {
+    padding: var(--space-4) var(--space-3);
+    background-color: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: var(--radius-input);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color var(--transition),
+                border-color var(--transition),
+                color var(--transition),
+                transform var(--transition);
+}
+
+.dsf__amount-option:hover {
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+.dsf__amount-option--selected {
+    background-color: var(--main-color) !important;
+    color: #fff !important;
+    border-color: var(--main-color) !important;
+    font-weight: 700 !important;
+}
+
+.dsf__amount-option--selected:hover {
+    background-color: var(--main-color-hover) !important;
+    border-color: var(--main-color-hover) !important;
+    color: #fff !important;
+}
+
+/* "Otro monto" — input numérico */
+.dsf__amount-option-input {
+    background-color: var(--input-bg) !important;
+    border: 1.5px solid var(--input-border) !important;
+    border-radius: var(--radius-input) !important;
+    padding: var(--space-4) var(--space-5) !important;
+    font-size: 15px !important;
+    font-family: var(--font-family) !important;
+    height: 48px !important;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.dsf__amount-option-input:focus {
+    border-color: var(--main-color) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px var(--main-color-ring) !important;
+}
+
+/* ── RECURRENCIA: Mensual / Única vez (pills) ───────────────────── */
+.dsf__recurrency {
+    margin: var(--space-5) 0 var(--space-3) 0;
+}
+
+.dsf__recurrency-option-list {
+    display: flex !important;
+    gap: var(--space-3) !important;
+    flex-wrap: wrap;
+}
+
+.dsf__recurrency-option {
+    flex: 1;
+    padding: var(--space-4) var(--space-5) !important;
+    background: var(--input-bg) !important;
+    border: 1.5px solid var(--input-border) !important;
+    border-radius: var(--radius-pill) !important;
+    cursor: pointer !important;
+    transition: border-color var(--transition),
+                background-color var(--transition),
+                color var(--transition);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: var(--space-3) !important;
+}
+
+.dsf__recurrency-option:hover {
+    border-color: var(--main-color) !important;
+}
+
+.dsf__recurrency-option--selected {
+    background: var(--main-color-soft) !important;
+    border-color: var(--main-color) !important;
+}
+
+.dsf__recurrency-option--selected .dsf__recurrency-option-label {
+    color: var(--main-color) !important;
+    font-weight: 700 !important;
+}
+
+.dsf__recurrency-option-label {
+    font-size: 14px !important;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* Ocultar el radio nativo dentro de las pills */
+.dsf__recurrency-option-radio {
+    width: 16px !important;
+    height: 16px !important;
+    border: 2px solid var(--input-border) !important;
+    border-radius: 50% !important;
+    transition: border-color var(--transition);
+    flex-shrink: 0;
+}
+
+.dsf__recurrency-option--selected .dsf__recurrency-option-radio {
+    border-color: var(--main-color) !important;
+}
+
+.dsf__recurrency-option-radio-inner {
+    background-color: var(--main-color) !important;
+}
+
+/* ── CHECKBOX "Acepto aumentar..." ──────────────────────────────── */
+.dsf__allow-upgrade {
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--space-3) !important;
+    margin: var(--space-5) 0 !important;
+}
+
+.dsf__allow-upgrade-checkbox {
+    width: 20px !important;
+    height: 20px !important;
+    border: 1.5px solid var(--input-border) !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: background-color var(--transition),
+                border-color var(--transition);
+    flex-shrink: 0;
+}
+
+.dsf__allow-upgrade-checkbox--checked {
+    background-color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
+}
+
+.dsf__allow-upgrade-label {
+    font-size: 13px !important;
+    color: var(--text-color);
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PASOS 2 y 3 · INPUTS Y LABELS
+   ════════════════════════════════════════════════════════════════ */
+
+.dsf__group,
+.dsf__payment .dsf__group,
+.dsf__card-data .dsf__group {
     position: relative;
-    margin-bottom: 20px;             /* Más respiro entre bloques (antes: 8px) */
+    margin-bottom: var(--space-6);
     display: flex;
     flex-direction: column;
 }
@@ -105,118 +291,114 @@ body {
 .payment-method-cc-verification-number label,
 .payment-method-cardholder-name label,
 .payment-method-cc-expiration-date label {
-    /* Labels editoriales — peso normal, sutiles, con respiro */
     display: block !important;
     position: relative !important;
-    margin-bottom: 10px !important;            /* Gap label text → input box */
+    margin: 0 0 var(--space-3) 0 !important;
     font-size: 13px !important;
     line-height: 1.3 !important;
-    color: var(--text-color) !important;
-    font-weight: 400 !important;               /* Normal weight, no bold */
+    color: var(--text-muted) !important;
+    font-weight: 500 !important;
     pointer-events: auto !important;
     height: auto !important;
     overflow: visible !important;
     text-transform: none !important;
     letter-spacing: 0 !important;
-    opacity: 0.85 !important;
 }
 
 .dsf__group input,
-.dsf__group select {
-    box-sizing: border-box;
-    padding: 12px 16px;
+.dsf__group select,
+.dsf__payment input,
+.dsf__card-data input {
+    box-sizing: border-box !important;
+    padding: var(--space-4) var(--space-5) !important;
     background-color: var(--input-bg) !important;
-    border: 1px solid #d1d1d1 !important;
-    border-radius: var(--radius-input);
-    font-size: 15px;
-    width: 100%;
+    border: 1.5px solid var(--input-border) !important;
+    border-radius: var(--radius-input) !important;
+    font-size: 15px !important;
+    font-family: var(--font-family) !important;
+    width: 100% !important;
     height: 48px !important;
-    box-shadow: var(--shadow-input);
+    box-shadow: none !important;
     color: var(--text-color) !important;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.dsf__group input:hover,
+.dsf__group select:hover {
+    border-color: var(--input-border-hover) !important;
+}
+
+.dsf__group input:focus,
+.dsf__group select:focus,
+.dsf__payment input:focus,
+.dsf__card-data input:focus {
+    border-color: var(--main-color) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px var(--main-color-ring) !important;
 }
 
 .dsf__group input::placeholder,
-.dsf__group select::placeholder {
-    color: #999 !important;
+.dsf__group select::placeholder,
+.dsf__payment input::placeholder {
+    color: #B0B0B0 !important;
     opacity: 1 !important;
+    font-weight: 400;
 }
 
-.dsf__group input:focus {
+.dsf__group--error input,
+.dsf__group--error select {
     border-color: var(--main-color) !important;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(219, 0, 7, 0.15);
 }
 
-/* === SELECCIÓN DE MONTO === */
-.dsf__amount-option-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 30px;          /* Respiro entre mensaje y montos */
-    margin-bottom: 25px;
+.dsf__group-error-message {
+    color: var(--main-color) !important;
+    font-size: 12px !important;
+    margin-top: var(--space-2) !important;
+    font-weight: 500;
 }
 
-.dsf__amount-option {
-    padding: 12px;
-    background-color: var(--input-bg);
-    border: 1px solid #ddd;
-    color: var(--text-color);
-    font-weight: 600;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-}
+/* ════════════════════════════════════════════════════════════════
+   BOTONES (Continuar / Volver)
+   ════════════════════════════════════════════════════════════════ */
 
-.dsf__amount-option--selected {
-    background-color: var(--main-color) !important;
-    color: #FFFFFF !important;
-    border-color: var(--main-color) !important;
-    font-weight: 700 !important;
-}
-
-.dsf__amount-option:hover {
-    border-color: var(--main-color);
-}
-
-/* === CONTENEDOR DE BOTONES (Volver arriba + Siguiente abajo) === */
 .dsf__buttons-container {
     display: flex !important;
     flex-direction: column-reverse !important;
-    gap: 15px !important;
+    gap: var(--space-4) !important;
     width: 100% !important;
+    margin-top: var(--space-6) !important;
 }
 
-/* === BOTÓN PRIMARIO === */
+/* ── BOTÓN PRIMARIO (Continuar / Donar) ─────────────────────────── */
 .dsf__button-next,
 button[type="submit"] {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
-    border: none;
+    border: none !important;
     background: var(--main-color) !important;
-    border-radius: var(--radius-btn);
-    padding: 14px 10px !important;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(219, 0, 7, 0.3);
-    min-height: 50px !important;
+    border-radius: var(--radius-btn) !important;
+    padding: var(--space-5) !important;
+    cursor: pointer !important;
+    min-height: 52px !important;
     height: auto !important;
-    margin-top: 0 !important;
-    /* Ocultar texto original — lo reemplazamos con ::after */
+    margin: 0 !important;
+    transition: background-color var(--transition), transform var(--transition);
+    box-shadow: 0 4px 14px rgba(219, 0, 7, 0.22);
+    /* Ocultar texto original — usamos ::after con var() */
     font-size: 0 !important;
     color: transparent !important;
 }
 
-/* TEXTO DINÁMICO DEL BOTÓN — Default: paso 1 */
 .dsf__button-next::after,
 button[type="submit"]::after {
     content: var(--btn-step-1);
-    font-size: 15px !important;
+    font-size: 14px !important;
     color: #fff !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.04em !important;
     line-height: 1.2 !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -234,34 +416,124 @@ button[type="submit"]::after {
 .dsf:has(.dsf__payment) .dsf__button-next::after,
 .dsf:has(.dsf__card-data) .dsf__button-next::after {
     content: var(--btn-step-3);
-    font-size: 18px !important;
+    font-size: 15px !important;
 }
 
 .dsf__button-next:hover {
     background-color: var(--main-color-hover) !important;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(219, 0, 7, 0.28);
 }
 
-/* === BOTÓN VOLVER (Arriba) === */
+.dsf__button-next:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(219, 0, 7, 0.22);
+}
+
+/* ── BOTÓN SECUNDARIO (Volver) ──────────────────────────────────── */
 .dsf__button-prev {
     background: transparent !important;
     border: none !important;
-    color: #999 !important;
-    text-decoration: underline;
+    color: var(--text-muted) !important;
+    text-decoration: none !important;
     font-size: 13px !important;
-    padding: 5px !important;
+    font-weight: 500 !important;
+    padding: var(--space-3) !important;
     margin: 0 !important;
-    cursor: pointer;
+    cursor: pointer !important;
     text-align: center !important;
     width: 100% !important;
-    transition: color 0.2s;
+    transition: color var(--transition);
+    border-radius: var(--radius-btn) !important;
 }
 
 .dsf__button-prev:hover {
-    color: var(--text-color) !important;
+    color: var(--main-color) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   AVISO LEGAL Y MENSAJE DE SEGURIDAD
+   ════════════════════════════════════════════════════════════════ */
+
+.dsf__legal-notice-container {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: var(--space-3) !important;
+    margin: var(--space-5) 0 !important;
+}
+
+.dsf__legal-notice-checkbox {
+    width: 18px !important;
+    height: 18px !important;
+    border: 1.5px solid var(--input-border) !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: background-color var(--transition),
+                border-color var(--transition);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.dsf__legal-notice-checkbox--checked {
+    background-color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
+}
+
+.dsf__legal-notice-label,
+.dsf__legal-notice {
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+    line-height: 1.5;
+}
+
+.dsf__legal-notice a {
+    color: var(--main-color);
+    text-decoration: underline;
 }
 
 /* Ocultar mensaje de seguridad genérico */
 .dsf__security-message {
     display: none !important;
+}
+
+/* ── LOADER ─────────────────────────────────────────────────────── */
+.dsf__loader-container {
+    color: var(--main-color) !important;
+}
+
+/* ── MENSAJES THANKS / ERROR ────────────────────────────────────── */
+.dsf__thanks-message,
+.dsf__error-message {
+    text-align: center;
+    padding: var(--space-7);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.dsf__error-message {
+    color: var(--main-color) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE · ≤480px
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+    .dsf {
+        padding: 88px var(--space-4) var(--space-5) var(--space-4) !important;
+    }
+
+    .dsf::before {
+        font-size: 17px !important;
+    }
+
+    .dsf__amount-option-list {
+        gap: var(--space-3);
+    }
+
+    .dsf__amount-option {
+        padding: var(--space-3) var(--space-2);
+        font-size: 14px;
+    }
 }

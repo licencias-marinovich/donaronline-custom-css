@@ -23,7 +23,7 @@
 
     /* === MENSAJES POR PASO (cámbialos por campaña) === */
     --msg-step-1: "Hoy puedes hacer que una familia esté cerca a su hijo mientras recibe tratamiento médico ❤️";
-    --msg-step-2: "Queremos conocerte, cuéntanos un poco de ti 📝";
+    --msg-step-2: "Queremos conocerte,\A cuéntanos un poco de ti 📝";
     --msg-step-3: "¡Ya estás a un solo paso de ayudar a una familia! ❤️";
 
     /* === TEXTO DE BOTÓN POR PASO === */
@@ -32,9 +32,9 @@
     --btn-step-3: "DONAR AHORA";
 
     /* === ESTILO (rara vez se cambia) === */
-    --radius-btn: 5px;
-    --radius-input: 4px;
-    --shadow-input: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    --radius-btn: 8px;
+    --radius-input: 10px;
+    --shadow-input: none;
     --font-family: 'Inter', sans-serif;
 }
 
@@ -71,6 +71,7 @@ body {
     text-align: center !important;
     color: var(--main-color) !important;
     line-height: 1.3 !important;
+    white-space: pre-line !important;          /* Permite line breaks con \A */
     position: absolute;
     top: 10px;
     left: 0;
@@ -104,19 +105,20 @@ body {
 .payment-method-cc-verification-number label,
 .payment-method-cardholder-name label,
 .payment-method-cc-expiration-date label {
-    /* Labels visibles arriba del input con 20px de gap hacia el box — paso 2 y 3 */
+    /* Labels editoriales — peso normal, sutiles, con respiro */
     display: block !important;
     position: relative !important;
-    margin-bottom: 20px !important;            /* Gap entre label text e input box */
+    margin-bottom: 10px !important;            /* Gap label text → input box */
     font-size: 13px !important;
     line-height: 1.3 !important;
     color: var(--text-color) !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;               /* Normal weight, no bold */
     pointer-events: auto !important;
     height: auto !important;
     overflow: visible !important;
     text-transform: none !important;
-    letter-spacing: 0.01em !important;
+    letter-spacing: 0 !important;
+    opacity: 0.85 !important;
 }
 
 .dsf__group input,

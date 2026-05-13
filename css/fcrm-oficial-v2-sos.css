@@ -17,9 +17,9 @@
     /* === COLORES (lo único que cambia entre campañas normalmente) === */
     --main-color: #db0007;          /* Rojo Ronald McDonald — botones, montos, focus */
     --main-color-hover: #b00006;    /* Rojo oscuro hover */
-    --bg-color: #FFEDD4;            /* Fondo del formulario (NO transparent) */
+    --bg-color: transparent;        /* Fondo transparente para adaptarse a la página host */
     --text-color: #2c2c2c;          /* Texto principal */
-    --input-bg: #FFFFFF;            /* Fondo de inputs */
+    --input-bg: #FFFFFF;            /* Fondo de inputs (siempre blanco para legibilidad) */
 
     /* === MENSAJES POR PASO (cámbialos por campaña) === */
     --msg-step-1: "Hoy puedes hacer que una familia esté cerca a su hijo mientras recibe tratamiento médico ❤️";

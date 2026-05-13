@@ -228,27 +228,10 @@ body {
     transition: color var(--transition);
 }
 
-/* Radio interno de la pill */
-.dsf__recurrency-option-radio {
-    width: 16px !important;
-    height: 16px !important;
-    border: 2px solid var(--input-border) !important;
-    border-radius: 50% !important;
-    transition: border-color var(--transition), background-color var(--transition);
-    flex-shrink: 0;
-}
-
-.dsf__recurrency-option--selected .dsf__recurrency-option-radio {
-    border-color: #fff !important;
-    background-color: transparent !important;
-}
-
+/* Radio interno de la pill · oculto para look limpio */
+.dsf__recurrency-option-radio,
 .dsf__recurrency-option-radio-inner {
-    background-color: var(--main-color) !important;
-}
-
-.dsf__recurrency-option--selected .dsf__recurrency-option-radio-inner {
-    background-color: #fff !important;
+    display: none !important;
 }
 
 /* ── CHECKBOX "Acepto aumentar..." ──────────────────────────────── */

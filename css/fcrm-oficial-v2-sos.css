@@ -53,7 +53,7 @@ body {
     width: 100% !important;
     max-width: 420px !important;
     margin: 0 auto !important;
-    padding: 140px 0 20px 0 !important;     /* top:140 deja espacio para mensaje + respiro hacia montos */
+    padding: 160px 0 20px 0 !important;     /* top:160 da más respiro entre mensaje y primer campo */
     background: var(--bg-color) !important;
     box-shadow: none !important;
     border: none !important;
@@ -92,7 +92,7 @@ body {
 /* === ETIQUETAS Y INPUTS === */
 .dsf__group {
     position: relative;
-    margin-bottom: 8px;
+    margin-bottom: 20px;             /* Más respiro entre bloques (antes: 8px) */
     display: flex;
     flex-direction: column;
 }

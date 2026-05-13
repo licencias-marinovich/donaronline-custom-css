@@ -536,4 +536,15 @@ button[type="submit"]::after {
         padding: var(--space-3) var(--space-2);
         font-size: 14px;
     }
+
+    /* Pills mensual/única vez · full width apilado en mobile */
+    .dsf__recurrency-option-list {
+        flex-direction: column !important;
+        gap: var(--space-3) !important;
+    }
+
+    .dsf__recurrency-option {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
 }
